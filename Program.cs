@@ -1,3 +1,10 @@
+using GRitiD.Data;
+using GRitiD.Repositories;
+using GRitiD.Repositories.Interfaces;
+using GRitiD.Servces;
+using GRitiD.Servces.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
 namespace GRitiD
 {
     public class Program
@@ -13,6 +20,14 @@ namespace GRitiD
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddEntityFrameworkSqlServer()
+                .AddDbContext<ApiContext>(
+                    options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
+            );
+
+            builder.Services.AddScoped<IWarehouseRepository, WarehouseRepository>();
+            builder.Services.AddScoped<IWarehouseService, WarehouseService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -25,7 +40,6 @@ namespace GRitiD
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

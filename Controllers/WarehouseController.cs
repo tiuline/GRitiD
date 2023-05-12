@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace GRitiD.Controllers
 {
     [ApiController]
-    [Route("[Warehouse]")]
+    [Route("Warehouse")]
     public class WarehouseController : ControllerBase
     {
         private readonly ILogger<WarehouseController> _logger;

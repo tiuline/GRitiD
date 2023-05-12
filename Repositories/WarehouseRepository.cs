@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GRitiD.Repositories
 {
-    internal class WarehouseService : IWarehouseRepository
+    internal class WarehouseRepository: IWarehouseRepository
     {
         private readonly ApiContext _dbContext;
 
-        public WarehouseService(ApiContext dbContext) 
+        public WarehouseRepository(ApiContext dbContext) 
         {
             _dbContext = dbContext;
         }
