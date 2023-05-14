@@ -1,3 +1,4 @@
+using GRitiD.Servces.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GRitiD.Controllers
@@ -6,17 +7,18 @@ namespace GRitiD.Controllers
     [Route("api/TextAnalyzer")]
     public class TextAnalyzerController : ControllerBase
     {
-        private readonly ILogger<TextAnalyzerController> _logger;
+        private readonly ITextAnalyzerService _textAnalyzerService;
 
-        public TextAnalyzerController(ILogger<TextAnalyzerController> logger)
+        public TextAnalyzerController(ITextAnalyzerService textAnalyzerService)
         {
-            _logger = logger;
+            _textAnalyzerService = textAnalyzerService;
         }
 
         [HttpPost]
-        public IActionResult Analyze([FromBody] string document)
+        [Route("analyze")]
+        public IActionResult Analyze([FromBody] string text)
         {
-            return Ok();
+            return Ok(_textAnalyzerService.Analyze(text));
         }
     }
 }
